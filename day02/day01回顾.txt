@@ -1,0 +1,28 @@
+回顾：
+
+1，django - web框架 - 工具箱 
+2，django-admin startproject 项目名
+3，settings.py  **
+4, url路由
+	urls.py 主路由，主要负责分发所有请求
+
+	urlpatterns = [
+		url(r'路由1', view1),
+		url(r'路由2', view2),
+	]
+
+	url给视图函数传参
+	1，正则启用了分组 (\d+), 用位置传参的方式
+	传递给视图函数
+	2，正则启用了命名分组(?P<name>\d+),用关
+	键字传参方式传递给视图函数
+
+5，视图函数 - 通过 HttpResponse 返回给浏览器
+   具体的响应；
+   视图函数第一个参数为request,即为请求对象
+
+
+6, GET方式传参  http://www.baidu.com/?key=value
+   &key2=value2&.....
+
+

@@ -1,0 +1,123 @@
+回顾:
+
+反向解析
+url(r'xxx', views, name='别名')
+
+{%  url  '别名'  %}
+{%  url '别名'  '参数1'  '参数2' %}
+
+静态文件
+
+STATIC_URL  = '/static/'   ->  访问地址  http://127.0.0.1:8000/static/   image/a.jpg
+
+STATICFILES_DIRS = （ ‘存储位置’）
+'存储位置' ->   os.path.join(BASE_DIR,  'static')
+
+{%  load  static  %}    
+{% static  'image/a.jpg' %}
+
+应用app
+python3 manage.py startapp 应用名称
+settings.py 中的INSTALLED_APP 注册
+INSTALLED_APP = (
+
+	'django自建应用',
+	'自定义应用的应用名'
+)
+
+分布式路由
+主路由中：
+    url(r'^sport/' , include('sport.urls'))
+应用app：
+    创建 urls.py
+    urlpatterns = [
+
+	配置自己应用下的路由
+]
+
+
+模型
+改 settings.py 里面 DATABASES ={}
+
+1，库 自己建
+2，在应用的models.py 文件下 通过创建类的形式创建表
+      from django.db import models
+           class 类名(models.Model):
+                  字段名 = 字段的类型(字段选项)
+3，python3 manage.py makemigrations  -> 生成同步文件【应用下migrations文件夹下  0001_xxxxx】
+4,  python3 manage.py migrate 
+
+
+通过ORM创建数据
+1， class.objects.create(属性1=值，属性2=值)
+2， obj = class(属性1=值)
+       obj.属性2 = 值
+       obj.save()   -> 触发数据存储关键
+
+django  shell
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

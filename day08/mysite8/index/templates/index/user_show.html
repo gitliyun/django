@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作用户</title>
+</head>
+<body>
+
+<a href="/index/csv">导出</a>
+
+<table border="1">
+    <tr>
+        <td>username</td>
+        <td>email</td>
+        <td>op</td>
+    </tr>
+    {% for user in all_user %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td><a href="#">发邮件</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+
+
+
+
+
+</body>
+</html>

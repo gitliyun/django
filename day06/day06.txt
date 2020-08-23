@@ -1,0 +1,153 @@
+day05回顾
+1，admin后台（xadmin）
+      python3 manage.py createsuperuser xxx
+
+      127.0.0.1:8000/admin/
+
+      #注册自定义model类
+      #file  app下面的 admin.py
+      from .models import *
+      admin.site.register(Book)
+      
+      定制化的样式
+      class BookManage(admin.ModelAdmin):
+              list_display = ['id', 'title'...]
+              list_display_link = ['id']
+              list_filter = []
+              search_filed = []
+              ...
+
+      admin.site.register(Book, BookManage)
+
+
+2, 关系映射
+    
+    1，一对一
+	class  A
+                        ...
+                 class  B
+	       author = models.OneToOne(A)
+
+	正向查询:
+	       b = B()
+                        b.author.属性
+	反向查询：
+	        a = A()
+	        a.b
+
+     2,   一对多 
+
+	class   A [一]
+	       ...
+                 class   B [多]
+                        ...
+	       pub = models.ForeignKey(A)
+
+	正向查询：
+	        b.pub
+
+	反向查询：
+	         a.b_set.all() / filter()/values().....
+
+      3, 多对多
+
+	class A
+                         ...
+                 class B
+                         ...
+                      m = models.ManyToManyField(A)
+
+ 	正向查询
+	      b.m.all() / filter() .... 种种
+
+	反向查询
+	      a.b_set.all() / filter()                     
+
+  
+Cookie 
+
+   1,   浏览器中 key value 存储   带过期时间   {'key':  'value'}
+
+   2，按域存储的  http://127.0.0.1:8000   {}  隔离性
+ 
+   3，浏览器给 cookie所在域发请求， 一定会携带当前所有cookie 发送至 服务器
+
+   4,   获取：request.COOKIES['key']  or   request.COOKIES.get('key')
+
+   5,   添加/更新 ： 
+	res = HttpResponse()
+                 res.set_cookie('key', 'value',  age=秒)
+	return  res
+   6， 删除
+	res = HttpResponse()
+                 res.delete_cookie('key')
+	return res
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+      
+

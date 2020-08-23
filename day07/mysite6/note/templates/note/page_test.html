@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页</title>
+</head>
+<body>
+<span> 目前页面有三个变量 - page paginator</span> current_p
+ {% for p in page %}
+      <div>
+          题目： {{ p.title }}
+      </div>
+ {% endfor %}
+
+{% if page.has_previous %}
+    <a href="/note/page_test?page={{ page.previous_page_number }}">上一页</a>
+{% else %}
+    上一页
+{% endif %}
+
+{% for p in paginator.page_range %}
+    {% if p == page.number %}
+        {{ p }}
+    {% else %}
+        <a href="/note/page_test?page={{ p }}">{{ p }}</a>
+    {% endif %}
+{% endfor %}
+
+
+{% if page.has_next %}
+    <a href="/note/page_test?page={{ page.next_page_number }}">下一页</a>
+{% else %}
+    下一页
+{% endif %}
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+# Copyright (C) Igor Sysoev
+
+
+cat << END >> $NGX_AUTO_HEADERS_H
+
+#ifndef NGX_SOLARIS
+#define NGX_SOLARIS  1
+#endif
+
+END
+
+CORE_INCS="$UNIX_INCS"
+CORE_DEPS="$UNIX_DEPS $SOLARIS_DEPS"
+CORE_SRCS="$UNIX_SRCS $SOLARIS_SRCS "
+EVENT_MODULES="$EVENT_MODULES"
+
+CORE_LIBS="$CORE_LIBS -lsocket -lnsl -lrt"
+
+# Solaris's make does not support a blank line between target and rules
+ngx_spacer=
+
+CC_AUX_FLAGS="-D_FILE_OFFSET_BITS=64 -lrt"
+
+
+case $NGX_PLATFORM in
+
+    *:sun4u)
+        # "-mcpu=v9" enables the "casa" assembler instruction
+        CFLAGS="$CFLAGS -mcpu=v9"
+    ;;
+
+esac
+
+
+if [ $ZLIB_ASM != NO ]; then
+    echo "$0: error: the --with-zlib-asm=CPU option is not supported"
+    echo "on that platform"
+    echo
+
+    exit 1
+fi
+
+
+ngx_feature="sendfilev()"
+ngx_feature_name="NGX_HAVE_SENDFILE"
+ngx_feature_run=no
+ngx_feature_incs="#include <sys/sendfile.h>"
+ngx_feature_libs="-lsendfile"
+ngx_feature_test="int fd = 1; sendfilevec_t vec[1];
+                  size_t sent; ssize_t n;
+                  n = sendfilev(fd, vec, 1, &sent)"
+. auto/feature
+
+
+if [ $ngx_found = yes ]; then
+    CORE_SRCS="$CORE_SRCS $SOLARIS_SENDFILEV_SRCS"
+    CORE_LIBS="$CORE_LIBS -lsendfile"
+fi

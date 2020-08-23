@@ -1,0 +1,106 @@
+day02 回顾：
+
+1，GET 传参  http://127.0.0.1:8000?
+key=value&key1=value1
+
+   获取参数方式：
+   	1，if request.method == 'GET'
+	2, request.GET['key'] or  request.GET
+	   .get('key')   'QueryDict类字典对象'
+	
+	3，request.GET.getlist('key') 获取单个
+	   key对应多个值
+
+GET 出现情况
+1，<a href='xxxxxxx'>点击回首页</a>
+2，浏览器地址 输入 url 并回车
+3，form 提交 method='get' 时 触发 get提交表单
+
+
+2，POST 请求传参
+   获取参数方式
+   1, if request.method == 'POST'
+   2，request.POST['key'] or request.POST.get()
+   3, request.POST.getlist()
+
+   <form method=post  action='/mycal'>
+      <input  name='key' value='haha'>
+      #<select name='key1'>
+      <input type='submit' value='提交'>
+   </form>
+
+   表单post body   key='haha'&key1=value1
+
+
+MTV/MVC
+
+MTV - django/flask 
+===================
+M - 数据层  - model
+T - 模板层  - template
+V - 视图层  - view
+===================
+C - 控制器（urls.py）
+
+标签语法
+
+{% 标签 %}
+{% 结束标签 %}
+
+{% if %}
+{% endif %}
+
+{% for %}
+{% endfor %}
+
+过滤器
+{{ 变量|过滤器:'参数'|过滤器2 }}
+
+模板的继承
+
+父模板
+  a.html
+  {% block 块名 %}
+  	我是主页
+  {% endblock 块名 %}
+
+子模板
+   b.html
+   {% extends 'a.html' %}
+
+   {% block  父模板中的块名 %}
+   	我是其他频道页面
+   {% endblock xxxxx %}
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

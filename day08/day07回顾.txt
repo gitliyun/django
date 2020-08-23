@@ -1,0 +1,109 @@
+1， Django 缓存
+    后端：
+             1，加快请求的响应 ， 把视图层的渲染结果存储起来，
+当下次网民访问的时候，直接将上次渲染的结果返回给用户；
+             2，配置层面：
+	       settings.py  
+	       CACHES = {
+                                  'default':
+                                  {
+                                  'BACKEND':  存储引擎[mysql/文件/内存里]，	
+		'LOCATIONS':  存储位置，
+                                  'OPTIONS':  {
+                                        'MAX_ENTRIES': 300 ,
+                                        'CULL_FREQUENCY':  3
+                                   }
+                              }
+
+	       }
+
+	3,使用
+		1，views  调用 cache_page(30)
+		2,   urls.py  cache_page(30)(views.func)
+		3,   模板  {% load  cache %}
+                                        {% cache 时间  cache_key  cache_key2 %}
+			xxxxxx
+		      {% endcache %}
+
+	
+	4, 使用场景
+
+		高频访问 且 数据实时性要求不高
+
+
+    前端【浏览器】
+
+	1，所有请求发出之前，一定会查找浏览器内部的缓存【内存/磁盘】
+	2,  强缓存 【Expires/Cache-Control】	
+	3,  如果强缓存过期，浏览器进行协商缓存
+	      1）把当前缓存标记 送至服务器 进行缓存有效性校验，如果服务器认为当前缓存可以用，响应304且body是空；
+如果服务器认为过期了，响应200且将该资源最新内容返回给浏览器
+	      2） Last-Modified 和 If-Modified-Since ; 值是资源的修改时间，难以检测到单秒内文件的多次修改
+                              Etag 和 If-None-Match; 值是资源的唯一标识[md5/sha]
+
+
+中间件
+
+         1，针对于django在请求、响应层面上进行过滤【全局】
+         2， 自定义中间件
+                   class   类名(MiddlewareMixin):
+		def  process_request(self, request):
+                                            #请求进到urls之前调用
+		          # None -> 一切正常 
+                                            # response对象 ->请求终止 
+                    	def process_view(self, request, callback,  callback_args,  callback_kwargs):
+		     #请求已经通过了urls分发，在进入视图层之前调用该方法
+		     #返回值 同上
+	
+		def process_response(self, request, response):	
+		      #视图函数执行完毕，响应到达浏览器之前调用该方法
+		      #返回值一定是 response对象
+
+          3， 洋葱
+
+
+作业思考：
+          1分钟内限制ip访问最多5次
+           count_dict = {}
+           count_dict = {ip:count}
+
+           PS: 要记录ip访问时间
+           当某ip第一次发出请求
+           count_dict = {ip: {'count':1 ,'time': time.time()}}
+
+           当某ip第二次发出请求
+           if ip in count_dict:
+                    _dict = count_dict[ip]
+                    if time.time() - _dict['time'] < 60:
+	         count_dict['count'] += 1
+                          if  count_dict['count'] > 5:
+		return HttpResponse('sorry')
+	         else:
+                                  return 
+		
+	   else:
+                          初始化本ip的数据 即 {'count':1 ,'time': time.time()}
+                          
+
+分页:
+   
+       请看笔记
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

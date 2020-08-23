@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>for 循环演示</h3>
+<ul>
+    {% for i in lst %}
+    {% if forloop.first %}<li>====</li>{% endif %}
+        <li> {{ forloop.revcounter0 }},城市名： {{ i }}</li>
+    {% if forloop.last %}<li>&&&&&</li>{% endif %}
+
+    {% empty %}
+        <li>对不起，暂时无数据，请稍后再试</li>
+
+    {% endfor %}
+</ul>
+
+
+
+</br>
+</br>
+</br>
+<h3> int 是 {{ int|add:'3' }} </h3>
+<h3> script 是 {{ script}} </h3>
+<h3> lst 是 {{ lst }} </h3>
+<h3> lst 第一个元素是  {{ lst.0 }} </h3>
+<h3> str 是 {{ str }} </h3>
+<h3> dict 是 {{ d }} </h3>
+<h3> dict['age'] 是 {{ d.age }}</h3>
+<h3> function 是 {{ say_hi }}</h3>
+<h3> class_obj 是 {{ class_obj.say }}</h3>
+
+
+
+</body>
+</html>

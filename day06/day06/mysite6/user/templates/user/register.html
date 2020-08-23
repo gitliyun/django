@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<form action="/user/reg" method="post">
+    <p>
+        用户名: <input type="text" name="username" value="{{ username }}">
+        <span>{{ username_error }}</span>
+    </p>
+    <p>
+        密码: <input type="text" name="password_1" value="{{ password_1 }}">
+        <span> {{ password_1_error }} </span>
+    </p>
+    <p>
+        再次输入密码: <input type="text" name="password_2" value="{{ password_2 }}">
+        <span> {{ password_2_error }} </span>
+    </p>
+    <p>
+        <input type="submit" value="注册">
+    </p>
+</form>
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+class.objects.all()    ->   查询全部数据    - QuerySet[obj,]
+class.objects.values()  ->  按指定字段查询  - QuerySet[dict,]
+
+class.objects.filter(关键字传参)  -> where查询 - QuerySet
+class.objects.get(关键字传参)  -> 爱报错[1，数据拿出多个时； 2，没查到数据；综上，使用时一定要try]
+
+查询谓词
+class.objects.filter(id__谓词 = xxx) 
+
+数据进行更新[update]
+1, 单条数据  ->    查(obj)，更(obj.attr=value)，存（obj.save()）
+
+2, 多条数据 ->  QuerySet.update(属性=值)
+
+
+删除数据[delete]
+1，伪删除
+	通常会在表中添加标记字段【isActive】, 通过这
+	个字段标记数据的活跃程度，若执行删除，则将
+	该字段变为False; 查询数据时 均要检查该字段，	只返回该字段为True的数据
+
+2，真删除
+	1，单条    - 查[obj] ，删[obj.delete()]
+	2，多条    - 查[QuerySet]  , 删[QuerySet.delete()]
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+

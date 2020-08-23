@@ -1,0 +1,47 @@
+
+# Copyright (C) Igor Sysoev
+
+
+if [ $OPENSSL != NONE ]; then
+    CORE_INCS="$CORE_INCS $OPENSSL/include"
+    CORE_DEPS="$CORE_DEPS $OPENSSL_DEPS"
+    CORE_SRCS="$CORE_SRCS $OPENSSL_SRCS"
+
+    case "$CC" in
+        *)
+            have=NGX_OPENSSL . auto/have
+            LINK_DEPS="$LINK_DEPS $OPENSSL/libssl.a $OPENSSL/libcrypto.a"
+            CORE_LIBS="$CORE_LIBS $OPENSSL/libssl.a $OPENSSL/libcrypto.a"
+        ;;
+    esac
+
+    case "$NGX_SYSTEM" in
+        SunOS|Linux)
+            CORE_LIBS="$CORE_LIBS -ldl"
+        ;;
+    esac
+
+
+else
+
+    if [ $NGX_PLATFORM != win32 ]; then
+        OPENSSL=NO
+
+        ngx_feature="OpenSSL library"
+        ngx_feature_name="NGX_OPENSSL"
+        ngx_feature_run=no
+        ngx_feature_incs="#include <openssl/ssl.h>"
+        ngx_feature_libs="-lssl -lcrypto"
+        ngx_feature_test="SSL_library_init()"
+        . auto/feature
+
+        if [ $ngx_found = yes ]; then
+            CORE_DEPS="$CORE_DEPS $OPENSSL_DEPS"
+            CORE_SRCS="$CORE_SRCS $OPENSSL_SRCS"
+            CORE_LIBS="$CORE_LIBS $ngx_feature_libs"
+            OPENSSL=YES
+        fi
+
+    fi
+
+fi
