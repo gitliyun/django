@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h5>s={{ s }}</h5>
+        <!--safe转义符-->
+        <h5>s | safe ={{ s | safe }}</h5>
+        <!--upper变大写，lower变小写-->
+        <h5>s | upper ={{ s | upper }}</h5>
+        <h5>s | lower ={{ s | lower }}</h5>
+        <!--add:'2'是n加2-->
+        <h5>n + 2 ={{ n | add:'2' }}</h5>
+        <!--truncatechars:8省略只留8个字符-->
+        <h5>s2 | truncatechars:8 ={{ s2 | truncatechars:8 }}</h5>
+    </div>
+</body>
+</html>

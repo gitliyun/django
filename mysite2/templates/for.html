@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for city in lst %}
+        {% if forloop.first %}<li>=======</li>{% endif %}
+        <!--forloop.属性：counter从1开始，counter0从0开始,revcounter或revcounter0从大开始,parentloop外层循环-->
+        <li>{{ forloop.revcounter }}、{{ city }}</li>
+        {% if forloop.last %}<li>---------</li>{% endif %}
+        {% empty %}
+        <li>没有城市</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

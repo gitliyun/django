@@ -426,7 +426,7 @@
     2. 删除 数据表
         - sql> drop database mywebdb;
     3. 重新创建 数据表
-        - sql> create datebase mywebdb default charset...;
+        - sql> create database mysite3_db default charset utf8 collate utf8_general_ci;
     4. 重新生成migrations里所有的 000?_XXXX.py
         - python3 manage.py makemigrations
     5. 重新更新数据库

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block mytitle %}
+    <title>主页</title>
+    {% endblock %}
+</head>
+<body>
+    <h1 style="background-color:blue;">注册，登录</h1>
+    <!--定义可以在子类中可以复盖-->
+    {% block page_info %}
+    <h1 style="background-color:orange;">网页主页</h1>
+    <a href="/sport">进入运动页</a>
+    <a href="{% url 'sport' %}">进入运动页</a>
+    <a href="{% url 'news' %}">进入新闻页</a>
+    <a href="{% url 'pagen' '1' %}">第一页</a>
+    <a href="{% url 'pagen' '1' %}">第二页</a>
+    {% endblock %}
+    <h1 style="background-color:grey;">新闻主页：tebu.cn</h1>
+</html>
